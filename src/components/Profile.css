@@ -1,0 +1,9 @@
+.content {
+  grid-area: c;
+  background-color: rgb(224, 176, 176);
+}
+.content img {
+  width: 800px;
+}
+
+/*# sourceMappingURL=Profile.css.map */
