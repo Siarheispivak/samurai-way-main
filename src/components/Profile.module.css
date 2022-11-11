@@ -5,5 +5,8 @@
 .content img {
   width: 800px;
 }
+.content .item {
+  color: #13ff02;
+}
 
-/*# sourceMappingURL=Profile.css.map */
+/*# sourceMappingURL=Profile.module.css.map */

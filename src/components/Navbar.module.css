@@ -1,0 +1,16 @@
+.nav {
+  grid-area: n;
+  background-color: rgba(12, 39, 201, 0.25);
+}
+.nav .item {
+  font-size: 18px;
+}
+.nav .links {
+  text-decoration: none;
+  color: #ffffff;
+}
+.nav .active {
+  color: gold;
+}
+
+/*# sourceMappingURL=Navbar.module.css.map */
