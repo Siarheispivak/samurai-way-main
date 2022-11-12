@@ -1,0 +1,12 @@
+.content {
+  grid-area: c;
+  background-color: rgb(224, 176, 176);
+}
+.content img {
+  width: 50px;
+}
+.content .item {
+  color: #13ff02;
+}
+
+/*# sourceMappingURL=Post.module.css.map */
