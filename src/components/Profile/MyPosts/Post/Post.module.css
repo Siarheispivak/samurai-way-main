@@ -1,12 +1,10 @@
-.content {
-  grid-area: c;
-  background-color: rgb(224, 176, 176);
-}
-.content img {
-  width: 50px;
-}
-.content .item {
+.item {
   color: #13ff02;
+}
+.item img {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
 }
 
 /*# sourceMappingURL=Post.module.css.map */
