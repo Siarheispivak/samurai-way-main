@@ -1,13 +1,19 @@
 import React from 'react';
 import s from './Post.module.css';
 
-const Post = () => {
+type PostPropsType = {
+    message:string
+    like:number
+}
+
+const Post = (props:PostPropsType) => {
+
     return  (
                     <div className={s.item}>
                         <img src="https://cspromogame.ru//storage/upload_images/avatars/1299.jpg" alt=""/>
-                        post 1
+                        {props.message}
                         <div>
-                            <span>like</span>
+                            <span>{props.like}</span>
                         </div>
                     </div>
     )
