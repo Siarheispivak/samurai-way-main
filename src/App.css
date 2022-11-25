@@ -1,4 +1,4 @@
-.app-wrapper{
+.app-wrapper {
     margin: 0 auto;
     display: grid;
     width: 1200px;
@@ -10,5 +10,14 @@
     /*grid-gap: 10px;*/
 }
 
-
+.app-wrapper-content {
+    grid-area: c;
+    background-color: rgb(224, 176, 176);
+}
+img{
+    width: 800px;
+}
+.item{
+    color: #13ff02;
+}
 
