@@ -1,9 +1,9 @@
-.content {
-  grid-area: c;
-  background-color: rgb(224, 176, 176);
+.postsBlock {
+  padding: 10px;
 }
-.content img {
-  width: 800px;
+
+.myPosts {
+  margin-top: 10px;
 }
 
 /*# sourceMappingURL=MyPosts.module.css.map */
