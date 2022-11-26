@@ -1,3 +1,15 @@
-
+.dialogs {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+}
+.dialogs .dialogsItems {
+  padding: 10px;
+}
+.dialogs .dialogsItems .dialog:hover {
+  color: gold;
+}
+.dialogs .messages {
+  padding: 10px;
+}
 
 /*# sourceMappingURL=Dialog.module.css.map */
