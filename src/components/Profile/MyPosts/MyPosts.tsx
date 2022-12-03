@@ -4,7 +4,6 @@ import s from './MyPosts.module.css'
 
 
  const MyPosts = (props:any) => {
-     console.log(props)
     let postsElements = props.posts.map((p:any)=><Post key={p.id} message={p.message}  likesCount={p.likesCount} id={p.id} />)
 
      let newPostElement = React.createRef<HTMLTextAreaElement>();
@@ -12,6 +11,7 @@ import s from './MyPosts.module.css'
      let addPost = () =>{
          let text = newPostElement.current?.value
          props.addPost(text)
+         // newPostElement.current?.value = ''
      }
 
 

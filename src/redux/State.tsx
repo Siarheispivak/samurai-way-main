@@ -1,5 +1,5 @@
 import React from "react";
-import {stat} from "fs";
+import {rerenderEntireTree} from "../render";
 
 export type PostsType = {
     id: number
@@ -80,5 +80,7 @@ export let addPost:any = (postMessage:any) => {
         likesCount:0
     }
     state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state);
 }
+
 export default state;
