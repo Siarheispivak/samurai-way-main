@@ -1,17 +1,30 @@
-.nav {
+.sideBar {
   grid-area: n;
   background-color: rgba(12, 39, 201, 0.25);
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
-.nav .item {
+.sideBar .nav .item {
   font-size: 18px;
 }
-.nav .item a {
+.sideBar .nav .item a {
   color: #e8e8e8;
   text-decoration: none;
 }
-.nav .item a:hover {
+.sideBar .nav .item a:hover {
   color: gold;
+}
+.sideBar .friends {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+.sideBar .friends .friendsItems {
+  display: flex;
+  gap: 10px;
 }
 
 /*# sourceMappingURL=Navbar.module.css.map */
