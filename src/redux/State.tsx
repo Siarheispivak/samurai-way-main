@@ -8,6 +8,7 @@ export type PostsType = {
 }
 export type ProfilePageType = {
     posts: Array<PostsType>
+    newPostText:string
 }
 
 export type DialogsType = {
@@ -22,6 +23,7 @@ export type MessageType = {
 export type DialogsPage = {
     dialogs: Array<DialogsType>
     message: Array<MessageType>
+    newMessageText:string
 }
 
 export type FriendsType = {
@@ -45,7 +47,8 @@ let state: StatePropsType = {
         posts: [
             {id: 1, message: 'Hey,how are you?', likesCount: 12},
             {id: 2, message: 'its my first post', likesCount: 11}
-        ]
+        ],
+        newPostText:'it-kamasutre',
     },
     dialogsPage: {
         dialogs: [
@@ -63,6 +66,7 @@ let state: StatePropsType = {
             {id: 4, message: 'Yo'},
             {id: 5, message: 'Yo'}
         ],
+        newMessageText:'Enter your message here!'
     },
     sideBar: {
         friends: [
@@ -73,14 +77,34 @@ let state: StatePropsType = {
     }
 
 }
-export let addPost:any = (postMessage:any) => {
-    let newPost = {
-        id:7,
-        message:postMessage,
+export let addPost = () => {
+    const newPost:PostsType = {
+        id:5,
+        message:state.profilePage.newPostText,
         likesCount:0
     }
-    state.profilePage.posts.push(newPost)
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = ''; //not working
     rerenderEntireTree(state);
+}
+export const updateNewPostText = (newText:string) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state)
+}
+
+export let addMessage = () => {
+    const newMessage:MessageType = {
+        id:9,
+        message:state.dialogsPage.newMessageText
+    }
+    state.dialogsPage.message.push(newMessage);
+    state.dialogsPage.newMessageText = ''; //not working
+    rerenderEntireTree(state);
+}
+
+export const updateNewMessageText = (newText:string) => {
+    state.dialogsPage.newMessageText = newText;
+    rerenderEntireTree(state)
 }
 
 export default state;
