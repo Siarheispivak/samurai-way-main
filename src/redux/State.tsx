@@ -1,5 +1,9 @@
 import React from "react";
-import {rerenderEntireTree} from "../render";
+
+let rerenderEntireTree = (state:StatePropsType) => {
+    console.log('state changed')
+}
+
 
 export type PostsType = {
     id: number
@@ -105,6 +109,9 @@ export let addMessage = () => {
 export const updateNewMessageText = (newText:string) => {
     state.dialogsPage.newMessageText = newText;
     rerenderEntireTree(state)
+}
+export const subscribe = (observer:()=>void) => {
+    rerenderEntireTree = observer;
 }
 
 export default state;
