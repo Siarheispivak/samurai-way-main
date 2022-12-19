@@ -1,3 +1,9 @@
+import profileReducer, {addPostAC, updateNewPostTextAC} from "./profile-reducer";
+import dialogsReducer, {addMessageAC, UpdateNewMessageActionType} from "./dialogs-reducer";
+import sidebarReducer from "./sidebar-reducer";
+
+
+
 export type PostsType = {
     id: number
     message: string
@@ -41,13 +47,17 @@ export type StatePropsType = {
 export type StorePropsType = {
     _state: StatePropsType
     _callSubscriber: (_state: StatePropsType) => void
-    updateNewPostText: (newText: string) => void
-    updateNewMessageText: (newText: string) => void
-    addPost: () => void
-    addMessage: () => void
     subscribe: (observer: () => void) => void
     getState: () => StatePropsType
+    dispatch: (action: ActionsTypes) => void
 }
+
+export type ActionsTypes = ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof addMessageAC>
+    | ReturnType<typeof UpdateNewMessageActionType>;
+
+
 
 
 export const store: StorePropsType = {
@@ -66,7 +76,7 @@ export const store: StorePropsType = {
                 {id: 3, name: 'Sveta', src: 'http://surl.li/dxldm'},
                 {id: 4, name: 'Sasha', src: 'http://surl.li/dxldn'},
                 {id: 5, name: 'Viktor', src: 'http://surl.li/dxldo'},
-                {id: 6, name: 'Valera', src: 'http://surl.li/dxldq'}
+                {id: 6, name: 'Valera', src: 'https://surl.li/dxldq'}
             ],
             message: [
                 {id: 1, message: 'Hi'},
@@ -89,39 +99,19 @@ export const store: StorePropsType = {
     _callSubscriber() {
         console.log('state changed');
     },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state)
-    },
-    updateNewMessageText(newText: string) {
-        this._state.dialogsPage.newMessageText = newText;
-        this._callSubscriber(this._state)
-    },
-
-
-    addPost() {
-        const newPost: PostsType = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = ''; //not working
-        this._callSubscriber(this._state);
-    },
-    addMessage() {
-        const newMessage: MessageType = {
-            id: 9,
-            message: this._state.dialogsPage.newMessageText
-        }
-        this._state.dialogsPage.message.push(newMessage);
-        this._state.dialogsPage.newMessageText = ''; //not working
-        this._callSubscriber(this._state);
-    },
     subscribe(observer) {
         this._callSubscriber = observer;
     },
     getState() {
         return this._state;
+    },
+    dispatch(action) {
+
+        this._state.profilePage = profileReducer(this._state.profilePage,action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage,action)
+        this._state.sideBar = sidebarReducer(this._state.sideBar,action)
+
+        this._callSubscriber(this._state);
     }
+
 }
