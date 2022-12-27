@@ -8,31 +8,30 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {Route} from "react-router-dom";
-import { StorePropsType} from "./redux/State";
+import {AllActionsType, AppStateType} from "./redux/redux-store";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
-    store:StorePropsType
+    store:AppStateType
+    dispatch:(action:AllActionsType)=>void
 }
 
 
 const App: React.FC<AppPropsType> = (props) => {
-    const state = props.store.getState();
-    return (
+    const state = props.store;
 
+    return (
         <div className='app-wrapper'>
             <Header/>
-            <Navbar state={state.sideBar}/>
+            <Navbar state={state.sidebar}/>
             <div className='app-wrapper-content'>
-                <Route exact path='/dialogs' render={() => <Dialogs dialogsPage={state.dialogsPage} dispatch={props.store.dispatch.bind(props.store)} />}/>
-                <Route path='/profile' render={() => <Profile profilePage={state.profilePage} dispatch={props.store.dispatch.bind(props.store)} />}/>
+                <Route exact path='/dialogs' render={() => <DialogsContainer store={props.store} dispatch={props.dispatch}/>}/>
+                <Route path='/profile' render={() => <Profile store={props.store} dispatch={props.dispatch}/>}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
             </div>
         </div>
-
     );
 }
-
-
 export default App;

@@ -52,7 +52,8 @@ export type StorePropsType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC>
+export type ActionsTypes =
+      ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof addMessageAC>
     | ReturnType<typeof UpdateNewMessageActionType>;
@@ -105,7 +106,7 @@ export const store: StorePropsType = {
     getState() {
         return this._state;
     },
-    dispatch(action) {
+    dispatch(action:any) {
 
         this._state.profilePage = profileReducer(this._state.profilePage,action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage,action)
