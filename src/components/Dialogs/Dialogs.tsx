@@ -6,7 +6,6 @@ import {DialogsPage,} from "../../redux/dialogs-reducer";
 
 type DialogsTypeProps = {
     dialogsPage: DialogsPage
-    // dispatch:(action:AllActionsType)=>void
     UpdateNewMessage:(text:string)=>void
     addMessage:()=>void
 }

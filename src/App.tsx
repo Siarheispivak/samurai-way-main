@@ -12,21 +12,20 @@ import {AllActionsType, AppStateType} from "./redux/redux-store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
-    store:AppStateType
     dispatch:(action:AllActionsType)=>void
 }
 
 
 const App: React.FC<AppPropsType> = (props) => {
-    const state = props.store;
+    // const state = props.store;
 
     return (
         <div className='app-wrapper'>
             <Header/>
-            <Navbar state={state.sidebar}/>
+            {/*<Navbar state={state.sidebar}/>*/}
             <div className='app-wrapper-content'>
-                <Route exact path='/dialogs' render={() => <DialogsContainer store={props.store} dispatch={props.dispatch}/>}/>
-                <Route path='/profile' render={() => <Profile store={props.store} dispatch={props.dispatch}/>}/>
+                <Route exact path='/dialogs' render={() => <DialogsContainer dispatch={props.dispatch}/>}/>
+                <Route path='/profile' render={() => <Profile dispatch={props.dispatch}/>}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>

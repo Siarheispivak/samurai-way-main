@@ -15,7 +15,7 @@ let rootReducers = combineReducers({
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer
 })
-type RootReducerType = typeof rootReducers
+export type RootReducerType = typeof rootReducers
 export type AppStateType = ReturnType<RootReducerType>
 
 export let store = createStore(rootReducers);
