@@ -1,9 +1,9 @@
- type PostsType = {
+ export type PostsType = {
     id: number
     message: string
     likesCount: number
 }
- type ProfilePageType = {
+export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
 }
@@ -34,25 +34,32 @@ export const updateNewPostTextAC = (newText: string) => {
         newText: newText
     } as const
 }
-
 const profileReducer = (state:ProfilePageType = initialState,action:ProfileActionsType) => {
-    // console.log(state)
     switch (action.type) {
-        case ADD_POST: //'ADD-POST'
+        case ADD_POST: {
             const newPost: PostsType = {
                 id: 5,
                 message: state.newPostText,
                 likesCount: 0
             }
-            state.posts.push(newPost);
-            state.newPostText = '';
-            return state
-        case UPDATE_NEW_POST_TEXT: //'UPDATE-NEW-POST-TEXT'
-            state.newPostText = action.newText;
-            return state
+            // const stateCopy = {...state, posts: state.posts.map((st) => ({...st}))};
+            // stateCopy.posts.push(newPost);
+            // stateCopy.newPostText = '';
+
+            // const stateCopy = {...state,newPostText:'',posts: [...state.posts,newPost]};
+
+            return {...state,newPostText:'',posts: [...state.posts,newPost]}
+        }
+        case UPDATE_NEW_POST_TEXT: {
+            // const stateCopy = {...state};
+            // stateCopy.newPostText = action.newText;
+            // return stateCopy
+
+            return {...state, newPostText: action.newText};
+        }
+        default:
+            return state;
     }
-    return state
+
 };
-
-
 export default profileReducer;

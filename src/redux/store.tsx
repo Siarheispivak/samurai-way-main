@@ -1,5 +1,5 @@
 import profileReducer, {addPostAC, updateNewPostTextAC} from "./profile-reducer";
-import dialogsReducer, {addMessageAC, UpdateNewMessageActionType} from "./dialogs-reducer";
+import dialogsReducer, {addMessageAC, UpdateNewMessageAC} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
 
@@ -56,7 +56,7 @@ export type ActionsTypes =
       ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof addMessageAC>
-    | ReturnType<typeof UpdateNewMessageActionType>;
+    | ReturnType<typeof UpdateNewMessageAC>;
 
 
 

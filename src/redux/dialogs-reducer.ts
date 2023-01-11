@@ -17,8 +17,8 @@ export type DialogsPage = {
 }
 
 export type DialogsActionsType =
-      ReturnType<typeof addMessageAC>
-    | ReturnType<typeof UpdateNewMessageActionType>
+    ReturnType<typeof addMessageAC>
+    | ReturnType<typeof UpdateNewMessageAC>
 
 
 let initialState = {
@@ -45,30 +45,37 @@ export const addMessageAC = () => {
         type: 'ADD-MESSAGE',
     } as const
 }
-export const UpdateNewMessageActionType = (newText: string) => {
+export const UpdateNewMessageAC = (newText: string) => {
     return {
         type: 'UPDATE-NEW-MESSAGE-TEXT',
         newText: newText
     } as const
 }
 
-const dialogsReducer = (state:DialogsPage = initialState,action:DialogsActionsType) => {
+const dialogsReducer = (state: DialogsPage = initialState, action: DialogsActionsType) => {
     switch (action.type) {
-        case ADD_MESSAGE:
+        case ADD_MESSAGE: {
             const newMessage: MessageType = {
                 id: 9,
                 message: state.newMessageText
             }
-            state.message.push(newMessage);
-            state.newMessageText = '';
+            // const stateCopy = {...state, message: state.message.map((el) => ({...el}))}
+            // const stateCopy = {...state,newMessageText:'',message:[...state.message,newMessage]}
+            // stateCopy.message.push(newMessage);
+            // stateCopy.newMessageText = '';
+            // return stateCopy
+            return {...state,newMessageText:'',message:[...state.message,newMessage]}
+        }
+        case UPDATE_NEW_MESSAGE_TEXT: {
+            // const stateCopy = {...state,newMessageText:action.newText}
+            // stateCopy.newMessageText = action.newText;
+            // return stateCopy
+            return {...state,newMessageText:action.newText}
+        }
+        default:
             return state
-            break;
-        case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newText;
-            return state
-            break;
     }
-    return state
+
 };
 
 export default dialogsReducer;
