@@ -2,46 +2,48 @@ import {addMessageAC, UpdateNewMessageAC} from "./dialogs-reducer";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
+const SET_USERS = 'SET-USERS';
 
-export type UserType= {
-    id:number
-    followed:boolean
-    fullName:string
-    status:string
-    location:{
-        city:string
-        country:string
+export type UserType = {
+    id: number
+    photoUrl:string
+    followed: boolean
+    fullName: string
+    status: string
+    location: {
+        city: string
+        country: string
     }
 }
 export type UsersType = {
-    users:Array<UserType>
+    users: Array<UserType>
 }
-export type  UsersActionsType = ReturnType<typeof followAC>
-    | ReturnType<typeof unFollowAC>
+export type  UsersActionsType =  ReturnType<typeof followAC> & ReturnType<typeof setUsersAC> |
+     ReturnType<typeof unFollowAC> & ReturnType<typeof setUsersAC>
 
 let initialState = {
-    users: [
-        {id: 1,followed:false, fullName: 'Dimych', status: 'Magistr',location:{city:'Minsk',country:'Belarus'}},
-        {id: 2,followed:false, fullName: 'Andrey', status: 'Padawan',location:{city:'Moscow',country:'Russia'}},
-        {id: 3,followed:true, fullName: 'Sveta', status: 'Ledi-Jedi',location:{city:'Dubai',country:'UAE'}},
-        {id: 4,followed:false, fullName: 'Sasha', status: 'Jedi',location:{city:'Minsk',country:'Belarus'}}
-    ]
+    users: []
 }
 
-const usersReducer = (state:UsersType = initialState,action:UsersActionsType):UsersType => {
+const usersReducer = (state: UsersType = initialState, action: UsersActionsType): UsersType => {
     switch (action.type) {
-        case FOLLOW:{
-        // const usersCopy = {...state,users:[...state.users]}
-        return  { ...state,users:state.users.map(el => el.id === action.userID ? {...el, followed: true} : {...el})}
+        case FOLLOW: {
+            // const usersCopy = {...state,users:[...state.users]}
+            return {...state, users: state.users.map(el => el.id === action.userID ? {...el, followed: true} : {...el})}
         }
-        case UNFOLLOW:{
-            return  { ...state,users:state.users.map(el => el.id === action.userID ? {...el, followed: false} : {...el})}
+        case UNFOLLOW: {
+            return {...state, users: state.users.map(el => el.id === action.userID ? {...el, followed: false} : {...el})}
+        }
+        case SET_USERS:{
+            return {...state,users:[...state.users, ...action.users]}
+            //49 lesson 33 minute
         }
         default:
             return state;
     }
 };
-export const followAC = (userID) => ({type:FOLLOW,userID})
-export const unFollowAC = (userID) => ({type:UNFOLLOW,userID})
+export const followAC = (userID: number) => ({type: FOLLOW, userID})
+export const unFollowAC = (userID: number) => ({type: UNFOLLOW, userID})
+export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users})
 
 export default usersReducer;

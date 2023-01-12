@@ -17,6 +17,7 @@ const Navbar: React.FC<any> = (props) => {
             <nav className={s.nav}>
                 <div className={s.item}><NavLink className={s.links} to="/profile" activeClassName={s.activeLink}>Profile</NavLink></div>
                 <div className={s.item}><NavLink className={s.links} to="/dialogs" activeClassName={s.activeLink}>Messages</NavLink></div>
+                <div className={s.item}><NavLink className={s.links} to="/users" activeClassName={s.activeLink}>Users</NavLink></div>
                 <div className={s.item}><NavLink className={s.links} to="/news" activeClassName={s.activeLink}>News</NavLink></div>
                 <div className={s.item}><NavLink className={s.links} to="/music" activeClassName={s.activeLink}>Music</NavLink></div>
                 <div className={s.item}><NavLink className={s.links} to="/settings" activeClassName={s.activeLink}>Settings</NavLink></div>
