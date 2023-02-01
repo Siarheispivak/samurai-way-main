@@ -1,5 +1,3 @@
-import {addMessageAC, UpdateNewMessageAC} from "./dialogs-reducer";
-
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -7,6 +5,10 @@ const SET_USERS = 'SET-USERS';
 export type UserType = {
     id: number
     photoUrl:string
+    photos:{
+        small: null,
+        large: null
+    }
     followed: boolean
     fullName: string
     status: string
@@ -20,11 +22,9 @@ export type UsersType = {
 }
 export type  UsersActionsType =  ReturnType<typeof followAC> & ReturnType<typeof setUsersAC> |
      ReturnType<typeof unFollowAC> & ReturnType<typeof setUsersAC>
-
 let initialState = {
     users: []
 }
-
 const usersReducer = (state: UsersType = initialState, action: UsersActionsType): UsersType => {
     switch (action.type) {
         case FOLLOW: {
