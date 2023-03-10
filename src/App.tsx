@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Profile/Profile";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
@@ -10,9 +9,8 @@ import {Route} from "react-router-dom";
 import {AllActionsType} from "./redux/redux-store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {store} from "./redux/store";
-import UsersContainer from "./components/Users/UsersContainer";
-
-
+import UsersContainer from "./components/UsersContainer/UsersContainer";
+import ProfileContainer from "./components/ProfileContainer/ProfileContainer";
 
 
 type AppPropsType = {
@@ -29,7 +27,7 @@ const App: React.FC<AppPropsType> = (props) => {
             <Navbar state={state.sideBar}/>
             <div className='app-wrapper-content'>
                 <Route exact path='/dialogs' render={() => <DialogsContainer />}/>
-                <Route path='/profile' render={() => <Profile/>}/>
+                <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                 <Route path='/users' render={() => <UsersContainer/>}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>

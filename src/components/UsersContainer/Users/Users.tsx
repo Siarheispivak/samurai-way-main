@@ -1,7 +1,10 @@
 import React from 'react';
-import s from "./Users.module.css";
-import userPhoto from "../assets/images/user.png";
-import {UserType} from "../../redux/users-reducer";
+import s from "./Users.module.scss";
+import userPhoto from "../../assets/images/user.png";
+
+import {NavLink} from "react-router-dom";
+import {UserType} from "../../../redux/users-reducer";
+
 
 type UsersPropsType = {
     totalUsersCount: number
@@ -34,7 +37,10 @@ const Users = (props: UsersPropsType) => {
             <div key={el.id}>
                     <span>
                         <div>
-                             <img src={el.photos.small != null ? el.photos.small : userPhoto} className={s.avatar}/>
+                            <NavLink to={'/profile/' + el.id}>
+                                <img src={el.photos.small != null ? el.photos.small : userPhoto} className={s.avatar}/>
+                            </NavLink>
+
                         </div>
                         <div>
                         {el.followed

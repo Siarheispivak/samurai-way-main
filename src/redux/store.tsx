@@ -108,7 +108,7 @@ export const store: StorePropsType = {
     },
     dispatch(action:any) {
 
-        this._state.profilePage = profileReducer(this._state.profilePage,action)
+        // this._state.profilePage = profileReducer(this._state.profilePage,action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage,action)
         this._state.sideBar = sidebarReducer(this._state.sideBar,action)
 

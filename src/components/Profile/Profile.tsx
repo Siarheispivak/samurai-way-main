@@ -1,18 +1,20 @@
 import React from 'react';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import MyPosts from "./MyPosts/MyPostsContainer";
+import {ProfileTypeProps} from "../ProfileContainer/ProfileContainer";
+import {ProfileType} from "../../redux/profile-reducer";
 
-type ProfileTypeProps = {
-    // dispatch:(action:AllActionsType)=>void
+
+type ProfileProps = ProfileTypeProps & {
+    profile:ProfileType
 }
 
-
-const Profile = (props: ProfileTypeProps) => {
+const Profile = (props: ProfileProps) => {
 
     return (
         <div>
-            <ProfileInfo/>
-            <MyPostsContainer />
+            <ProfileInfo profile={props.profile}/>
+            <MyPosts  />
         </div>
     )
 }
