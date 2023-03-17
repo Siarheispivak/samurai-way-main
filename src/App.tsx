@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
@@ -11,6 +10,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {store} from "./redux/store";
 import UsersContainer from "./components/UsersContainer/UsersContainer";
 import ProfileContainer from "./components/ProfileContainer/ProfileContainer";
+import HeaderContainer from "./components/HeaderContainer/HeaderContainer";
 
 
 type AppPropsType = {
@@ -23,7 +23,7 @@ const App: React.FC<AppPropsType> = (props) => {
 
     return (
         <div className='app-wrapper'>
-            <Header/>
+            <HeaderContainer/>
             <Navbar state={state.sideBar}/>
             <div className='app-wrapper-content'>
                 <Route exact path='/dialogs' render={() => <DialogsContainer />}/>

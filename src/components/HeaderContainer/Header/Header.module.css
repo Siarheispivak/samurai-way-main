@@ -8,5 +8,11 @@
 .header img {
   width: 50px;
 }
+.header .loginBlock {
+  float: right;
+}
+.header .loginBlock a {
+  color: white;
+}
 
 /*# sourceMappingURL=Header.module.css.map */
