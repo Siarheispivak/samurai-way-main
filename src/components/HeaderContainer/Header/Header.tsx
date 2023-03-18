@@ -3,7 +3,6 @@ import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 
 type HeaderPropsType = {
-    setAuthUserData:(userId: number, email: string, login: string) => void // зчем сюда передаём??? или лучше передать только мапстэйттупропс в хедер Контейнере?
     login: string,
     isAuth:boolean
 }
