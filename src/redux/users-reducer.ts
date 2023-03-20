@@ -13,13 +13,14 @@ export type UserType = {
         country: string
     }
 }
-
+export type FollowingInProgressType = Array<number>
 export type initialStateType = {
     users: Array<UserType>
     pageSize: number,
     totalUsersCount: number,
     currentPage: number
     isFetching:boolean
+    followingInProgress: FollowingInProgressType
 }
 export type  UsersActionsType =
     | ReturnType<typeof follow>
@@ -28,13 +29,15 @@ export type  UsersActionsType =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof toggleFollowingProgress>
 
 let initialState: initialStateType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching:false
+    isFetching:false,
+    followingInProgress:[]
 }
 const usersReducer = (state: initialStateType = initialState, action: UsersActionsType): initialStateType => {
     switch (action.type) {
@@ -60,6 +63,13 @@ const usersReducer = (state: initialStateType = initialState, action: UsersActio
         case 'TOGGLE-FETCHING': {
             return {...state, isFetching: action.isFetching}
         }
+        case 'TOGGLE_IS_FOLLOWING_PROGRESS':{
+            return {...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress,action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
+            }
+        }
         default:
             return state;
     }
@@ -71,5 +81,6 @@ export const setUsers = (users: Array<UserType>) => ({type: 'SET-USERS', users} 
 export const setCurrentPage = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage} as const)
 export const setTotalUsersCount = (totalUsersCount: number) => ({type: 'SET-TOTAL-USERS-COUNT', count:totalUsersCount} as const)
 export const toggleIsFetching = (isFetching: boolean) => ({type: 'TOGGLE-FETCHING', isFetching} as const)
+export const toggleFollowingProgress = (isFetching: boolean,userId:number) => ({type: 'TOGGLE_IS_FOLLOWING_PROGRESS', isFetching,userId} as const)
 
 export default usersReducer;
