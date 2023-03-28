@@ -1,15 +1,10 @@
-import {combineReducers, createStore} from "redux";
-import profileReducer, {addPostAC, updateNewPostTextAC} from "./profile-reducer";
-import dialogsReducer, {addMessageAC, UpdateNewMessageAC} from "./dialogs-reducer";
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import profileReducer, {ProfileActionsType} from "./profile-reducer";
+import dialogsReducer, {DialogsActionsType} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
-import usersReducer from "./users-reducer";
-import authReducer from "./auth-reducer";
-
-export type AllActionsType =
-    ReturnType<typeof addMessageAC>
-    | ReturnType<typeof UpdateNewMessageAC> |
-    ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostTextAC>
+import usersReducer, {UsersActionsType} from "./users-reducer";
+import authReducer, {AuthActionsType} from "./auth-reducer";
+import thunkMiddleware, {ThunkAction} from "redux-thunk";
 
 
 let rootReducer = combineReducers({
@@ -22,7 +17,20 @@ let rootReducer = combineReducers({
 export type RootReducerType = typeof rootReducer
 export type AppStateType = ReturnType<RootReducerType>
 
+//все типы экшенов для всего App
+export type AppActionsType =
+    | UsersActionsType
+    | ProfileActionsType
+    // | SidebarActionsType
+    | AuthActionsType
+    | DialogsActionsType
 
+export type AppThunk<ReturnType = void> = ThunkAction<
+    ReturnType,
+    AppStateType,
+    unknown,
+    AppActionsType
+    >
 
-export let store = createStore(rootReducer);
+export let store = createStore(rootReducer,applyMiddleware(thunkMiddleware));
 

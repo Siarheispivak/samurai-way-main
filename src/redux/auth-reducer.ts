@@ -1,4 +1,4 @@
-type AuthActionsType = setAuthUserDatatype
+export type AuthActionsType = setAuthUserDatatype
 
 type initialStateType = {
     userId: number
