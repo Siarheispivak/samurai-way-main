@@ -1,3 +1,6 @@
+import {AppThunk} from "./redux-store";
+import {profileAPI} from "../api/api";
+
 export type ProfileContactsType = {
     contacts: {
         facebook: string,
@@ -11,8 +14,8 @@ export type ProfileContactsType = {
     }
 }
 export type ProfilePhotosType = {
-        small: string,
-        large: string
+    small: string,
+    large: string
 }
 export type ProfileType = {
     aboutMe: string,
@@ -21,7 +24,7 @@ export type ProfileType = {
     lookingForAJobDescription: string,
     fullName: string,
     userId: number,
-    photos:ProfilePhotosType
+    photos: ProfilePhotosType
 }
 
 
@@ -95,6 +98,15 @@ export const setUserProfile = (profile: ProfileType) => {
         type: 'SET-USER-PROFILE',
         profile
     } as const
+}
+
+
+export const setUser = (userId: string): AppThunk => {
+    return (dispatch) => {
+        profileAPI.setUserId(userId).then(data => {
+            dispatch(setUserProfile(data))
+        });
+    }
 }
 
 export default profileReducer;

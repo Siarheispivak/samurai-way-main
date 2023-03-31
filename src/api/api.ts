@@ -35,4 +35,22 @@ export const followUnfollowAPI = {
 
 }
 
+export const authAPI = {
+    auth(){
+        return instance.get(`auth/me`).then(response => {
+            return response.data
+        })
+    }
+}
+
+export  const profileAPI = {
+    setUserId(userId:string){
+        return instance.get(`profile/${userId}`).then(response => {
+            return response.data
+        })
+    }
+}
+
+
+
 

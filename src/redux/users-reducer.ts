@@ -130,4 +130,6 @@ export const unFollow = (userId:number):AppThunk => {
 }
 
 
+
+
 export default usersReducer;
