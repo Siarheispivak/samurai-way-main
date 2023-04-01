@@ -3,11 +3,13 @@ import s from './Dialog.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogsItem";
 import {DialogType} from "./DialogsContainer";
+import {Redirect} from "react-router-dom";
 
 
 const Dialogs: React.FC<DialogType> = (props) => {
 
-    let dialogElements = props.dialogsPage.dialogs.map((d) => <DialogItem key={d.id} name={d.name} id={d.id} avatar={d.src}/>)
+    let dialogElements = props.dialogsPage.dialogs.map((d) => <DialogItem key={d.id} name={d.name} id={d.id}
+                                                                          avatar={d.src}/>)
     let messageElements = props.dialogsPage.message.map((m) => <Message key={m.id} message={m.message} id={m.id}/>)
 
     let onAddMessage = () => {
@@ -17,7 +19,10 @@ const Dialogs: React.FC<DialogType> = (props) => {
         let text = e.currentTarget.value;
         props.UpdateNewMessageAC(text)
     }
+
+    if (!props.isAuth) return <Redirect to={"/login"}/>
     return (
+
         <div>
             <div className={s.dialogs}>
                 <div className={s.dialogsItems}>

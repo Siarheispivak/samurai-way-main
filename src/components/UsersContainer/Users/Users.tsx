@@ -3,7 +3,7 @@ import s from "./Users.module.scss";
 import userPhoto from "../../assets/images/user.png";
 
 import {NavLink} from "react-router-dom";
-import {FollowingInProgressType, UserType} from "../../../redux/users-reducer";
+import {FollowingInProgressType, setCurrentPage, UserType} from "../../../redux/users-reducer";
 import {followUnfollowAPI} from "../../../api/api";
 
 
@@ -13,10 +13,7 @@ type UsersPropsType = {
     currentPage: number
     onPageChanged: (totalCount: number) => void
     users: Array<UserType>
-    // followSuccess: (userID: number) => void
-    // unFollowSuccess: (userID: number) => void
     followingInProgress:FollowingInProgressType
-    // toggleFollowingProgress:(disabled:boolean,userId:number)=>void
     follow:(userId:number)=>void
     unFollow:(userId:number)=>void
 }

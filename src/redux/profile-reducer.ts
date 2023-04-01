@@ -1,5 +1,5 @@
 import {AppThunk} from "./redux-store";
-import {profileAPI} from "../api/api";
+import {usersAPI} from "../api/api";
 
 export type ProfileContactsType = {
     contacts: {
@@ -101,9 +101,9 @@ export const setUserProfile = (profile: ProfileType) => {
 }
 
 
-export const setUser = (userId: string): AppThunk => {
+export const getUserProfile = (userId: string): AppThunk => {
     return (dispatch) => {
-        profileAPI.setUserId(userId).then(data => {
+        usersAPI.getProfile(userId).then(data => {
             dispatch(setUserProfile(data))
         });
     }

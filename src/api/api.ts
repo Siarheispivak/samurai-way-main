@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 
 const instance = axios.create({
     withCredentials: true,
@@ -13,6 +12,11 @@ export const usersAPI = {
     getUsers(currentPage = 1, pageSize = 10) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
             return response.data;
+        })
+    },
+    getProfile(userId:string){
+        return instance.get(`profile/${userId}`).then(response => {
+            return response.data
         })
     }
 }
@@ -31,21 +35,14 @@ export const followUnfollowAPI = {
             return response.data;
 
         })
-    }
+    },
+
 
 }
 
 export const authAPI = {
-    auth(){
+    me(){
         return instance.get(`auth/me`).then(response => {
-            return response.data
-        })
-    }
-}
-
-export  const profileAPI = {
-    setUserId(userId:string){
-        return instance.get(`profile/${userId}`).then(response => {
             return response.data
         })
     }

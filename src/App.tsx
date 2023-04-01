@@ -11,6 +11,7 @@ import {store} from "./redux/store";
 import UsersContainer from "./components/UsersContainer/UsersContainer";
 import ProfileContainer from "./components/ProfileContainer/ProfileContainer";
 import HeaderContainer from "./components/HeaderContainer/HeaderContainer";
+import {Login} from "./components/Login/Login";
 
 
 type AppPropsType = {
@@ -32,6 +33,7 @@ const App: React.FC<AppPropsType> = (props) => {
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
+                <Route path='/login' render={() => <Login/>}/>
             </div>
         </div>
     );
