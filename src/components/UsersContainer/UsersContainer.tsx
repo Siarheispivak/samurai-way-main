@@ -12,8 +12,8 @@ import {
 } from "../../redux/users-reducer";
 import Users from "./Users/Users";
 import Preloader from "../common/preloader/Preloader";
-import {Redirect} from "react-router-dom";
-
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 type MapStatePropsType = {
     users: Array<UserType>
@@ -22,7 +22,7 @@ type MapStatePropsType = {
     currentPage: number
     isFetching: boolean
     followingInProgress:FollowingInProgressType
-    isAuth:boolean
+
 }
 type MapDispatchPropsType = {
     followSuccess: (userID: number) => void
@@ -33,6 +33,7 @@ type MapDispatchPropsType = {
     toggleFollowingProgress:(disabled:boolean,userId:number)=>void
     getUsers:(currentPage:number, pageSize:number)=>void
 }
+export type UsersTypeProps = MapStatePropsType & MapDispatchPropsType
 
 class UsersContainer extends React.Component<UsersTypeProps> {
     componentDidMount() {
@@ -46,7 +47,6 @@ class UsersContainer extends React.Component<UsersTypeProps> {
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={"/login"}/>
         return (
             <>
                 {this.props.isFetching ? <Preloader/> : null}
@@ -73,16 +73,18 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress:state.usersPage.followingInProgress,
-        isAuth: state.auth.isAuth,
     }
 }
-export type UsersTypeProps = MapStatePropsType & MapDispatchPropsType
-export default connect(mapStateToProps, {
-    followSuccess,
-    unFollowSuccess,
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsers,
-    follow,
-    unFollow
-})(UsersContainer)
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        followSuccess,
+        unFollowSuccess,
+        setCurrentPage,
+        toggleFollowingProgress,
+        getUsers,
+        follow,
+        unFollow
+    }),
+    withAuthRedirect
+)(UsersContainer)

@@ -20,7 +20,6 @@ const Dialogs: React.FC<DialogType> = (props) => {
         props.UpdateNewMessageAC(text)
     }
 
-    if (!props.isAuth) return <Redirect to={"/login"}/>
     return (
 
         <div>
