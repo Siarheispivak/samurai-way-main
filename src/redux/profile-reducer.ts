@@ -1,5 +1,5 @@
 import {AppThunk} from "./redux-store";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 
 export type ProfileContactsType = {
     contacts: {
@@ -37,17 +37,22 @@ export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
     profile: ProfileType
+    status:string
 }
 
 export type ProfileActionsType =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setStatus>
+    | ReturnType<typeof updateStatus>
 
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
+const SET_STATUS = 'SET-STATUS';
+const UPDATE_STATUS = 'UPDATE-STATUS';
 
 let initialState: ProfilePageType = {
     posts: [
@@ -55,7 +60,8 @@ let initialState: ProfilePageType = {
         {id: 2, message: 'its my first post', likesCount: 11}
     ],
     newPostText: 'it-kamasutre',
-    profile: {} as ProfileType
+    profile: {} as ProfileType,
+    status:'',
 }
 
 
@@ -75,6 +81,12 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
         case SET_USER_PROFILE: {
 
             return {...state, profile: action.profile};
+        }
+        case SET_STATUS: {
+            return {...state,status:action.status}
+        }
+        case UPDATE_STATUS: {
+            return {...state,status:action.status}
         }
         default:
             return state;
@@ -99,13 +111,45 @@ export const setUserProfile = (profile: ProfileType) => {
         profile
     } as const
 }
+export const setStatus = (status: string) => {
+    return {
+        type: 'SET-STATUS',
+        status
+    } as const
+}
+export const updateStatus = (status: string) => {
+    return {
+        type: 'UPDATE-STATUS',
+        status
+    } as const
+}
+
+
 
 
 export const getUserProfile = (userId: string): AppThunk => {
     return (dispatch) => {
-        usersAPI.getProfile(userId).then(data => {
+        profileAPI.getProfile(userId).then(data => {
             dispatch(setUserProfile(data))
         });
+    }
+}
+
+export const getUserStatus = (userId:any): AppThunk => {
+    return(dispatch)=> {
+        profileAPI.getStatus(userId).then((data => {
+            dispatch(setStatus(data))
+        }))
+    }
+}
+
+export const updateUserStatus = (status:any): AppThunk => {
+    return(dispatch)=> {
+        profileAPI.updateStatus(status).then((response => {
+            if(response.data.resultCode === 0) {
+                dispatch(updateStatus(status))
+            }
+        }))
     }
 }
 
