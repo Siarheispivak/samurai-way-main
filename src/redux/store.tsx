@@ -1,7 +1,6 @@
-import profileReducer, {addPostAC, updateNewPostTextAC} from "./profile-reducer";
-import dialogsReducer, {addMessageAC, UpdateNewMessageAC} from "./dialogs-reducer";
+import {addPostAC} from "./profile-reducer";
+import dialogsReducer, {addMessageAC} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
-
 
 
 export type PostsType = {
@@ -26,7 +25,6 @@ export type MessageType = {
 export type DialogsPage = {
     dialogs: Array<DialogsType>
     message: Array<MessageType>
-    newMessageText: string
 }
 
 export type FriendsType = {
@@ -54,9 +52,8 @@ export type StorePropsType = {
 
 export type ActionsTypes =
       ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof addMessageAC>
-    | ReturnType<typeof UpdateNewMessageAC>;
+
 
 
 
@@ -86,7 +83,6 @@ export const store: StorePropsType = {
                 {id: 4, message: 'Yo'},
                 {id: 5, message: 'Yo'}
             ],
-            newMessageText: 'Enter your message here!'
         },
         sideBar: {
             friends: [

@@ -10,7 +10,6 @@ import {compose} from "redux";
 
 type MapStatePropsType = {
     posts: Array<PostsType>
-    newPostText: string
     profile: ProfileType
     status:string
 
@@ -52,7 +51,6 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         profile: state.profilePage.profile,
         posts: state.profilePage.posts,
-        newPostText: state.profilePage.newPostText,
         status:state.profilePage.status
     }
 }

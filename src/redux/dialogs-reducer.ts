@@ -1,5 +1,5 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+
 
 export type DialogsType = {
     id: number
@@ -13,12 +13,11 @@ export type MessageType = {
 export type DialogsPage = {
     dialogs: Array<DialogsType>
     message: Array<MessageType>
-    newMessageText: string
 }
 
 export type DialogsActionsType =
     ReturnType<typeof addMessageAC>
-    | ReturnType<typeof UpdateNewMessageAC>
+
 
 
 let initialState = {
@@ -37,18 +36,12 @@ let initialState = {
         {id: 4, message: 'Yo'},
         {id: 5, message: 'Yo'}
     ],
-    newMessageText: 'Enter your message here!'
 }
 
-export const addMessageAC = () => {
+export const addMessageAC = (newMessageBody:string) => {
     return {
         type: 'ADD-MESSAGE',
-    } as const
-}
-export const UpdateNewMessageAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newText: newText
+        newMessageBody
     } as const
 }
 
@@ -57,12 +50,9 @@ const dialogsReducer = (state: DialogsPage = initialState, action: DialogsAction
         case ADD_MESSAGE: {
             const newMessage: MessageType = {
                 id: 9,
-                message: state.newMessageText
+                message: action.newMessageBody
             }
-            return {...state,newMessageText:'',message:[...state.message,newMessage]}
-        }
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            return {...state,newMessageText:action.newText}
+            return {...state,message:[...state.message,newMessage]}
         }
         default:
             return state

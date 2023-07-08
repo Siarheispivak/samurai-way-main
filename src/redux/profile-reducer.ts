@@ -1,5 +1,5 @@
 import {AppThunk} from "./redux-store";
-import {profileAPI, usersAPI} from "../api/api";
+import {profileAPI} from "../api/api";
 
 export type ProfileContactsType = {
     contacts: {
@@ -35,21 +35,18 @@ export type PostsType = {
 }
 export type ProfilePageType = {
     posts: Array<PostsType>
-    newPostText: string
     profile: ProfileType
     status:string
 }
 
 export type ProfileActionsType =
     ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof updateStatus>
 
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_STATUS = 'SET-STATUS';
 const UPDATE_STATUS = 'UPDATE-STATUS';
@@ -59,7 +56,6 @@ let initialState: ProfilePageType = {
         {id: 1, message: 'Hey,how are you?', likesCount: 12},
         {id: 2, message: 'its my first post', likesCount: 11}
     ],
-    newPostText: 'it-kamasutre',
     profile: {} as ProfileType,
     status:'',
 }
@@ -70,13 +66,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
         case ADD_POST: {
             const newPost: PostsType = {
                 id: 5,
-                message: state.newPostText,
+                message: action.newPostBody,
                 likesCount: 0
             }
-            return {...state, newPostText: '', posts: [...state.posts, newPost]}
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return {...state, newPostText: action.newText};
+            return {...state, posts: [...state.posts, newPost]}
         }
         case SET_USER_PROFILE: {
 
@@ -94,15 +87,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
 
 };
 
-export const addPostAC = () => {
+export const addPostAC = (newPostBody:string) => {
     return {
-        type: 'ADD-POST'
-    } as const
-}
-export const updateNewPostTextAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
+        type: 'ADD-POST',
+        newPostBody
     } as const
 }
 export const setUserProfile = (profile: ProfileType) => {

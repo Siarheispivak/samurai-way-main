@@ -16,6 +16,8 @@ let rootReducer = combineReducers({
     auth:authReducer,
     form:formReducer
 })
+export let store = createStore(rootReducer,applyMiddleware(thunkMiddleware));
+
 export type RootReducerType = typeof rootReducer
 export type AppStateType = ReturnType<RootReducerType>
 
@@ -27,12 +29,10 @@ export type AppActionsType =
     | AuthActionsType
     | DialogsActionsType
 
-export type AppThunk<ReturnType = void> = ThunkAction<
-    ReturnType,
-    AppStateType,
-    unknown,
-    AppActionsType
-    >
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, AppActionsType>
 
-export let store = createStore(rootReducer,applyMiddleware(thunkMiddleware));
+// @ts-ignore
+window.store = store.getState()
+
+
 
